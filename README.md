@@ -2,8 +2,10 @@
 
 This project contains in-memory implementations of the journal and snapshot store for akka-persistence that are designed to work with multi-node and single-node unit tests.  Since all data is kept in memory structures, there are no side effects or cleanup between test runs.  These plugins are tested against `akka-persistence-tck-experimental` version 2.3.6
 
+[![Build Status](https://travis-ci.org/jdgoldie/akka-persistence-shared-inmemory.svg)](https://travis-ci.org/jdgoldie/akka-persistence-shared-inmemory)
 
 **Adding to your project**
+
 *todo: add when CI build working*
 
 
@@ -41,11 +43,13 @@ These plugins are only proxies to the actual stores, however, and must be config
 	Persistence(system)
 	
 	runOn(node1) {
-	  SharedInMemoryJournal.setStore(system.actorOf(Props[SharedInMemoryMessageStore], "journalStore"), system)
+	  SharedInMemoryJournal.setStore(system.actorOf(
+	      Props[SharedInMemoryMessageStore], "journalStore"), system)
 	}
 	
 	runOn(node2) {
-	  SharedInMemoryJournal.setStore(getActorRef(node(node1) / "user" / "journalStore").get, system)
+	  SharedInMemoryJournal.setStore(getActorRef(
+	      node(node1) / "user" / "journalStore").get, system)
 	}
 	
 	
@@ -55,11 +59,13 @@ On *node1*, the journalStore actor is created and the plugin-proxy is given a re
 The shared snapshot store is configured in a similar way.  An example can be found in `ExampleMultiJvmTestSpec.scala` as well:
 
 	runOn(node1) {
-	  Persistence(system).snapshotStoreFor(null) ! SharedInMemorySnapshotStore.SetStore(system.actorOf(Props[InMemorySnapshotStore], "snapStore"))
+	  Persistence(system).snapshotStoreFor(null) ! 
+	      SharedInMemorySnapshotStore.SetStore(system.actorOf(Props[InMemorySnapshotStore], "snapStore"))
 	}
 	
 	runOn(node2) {
-	  Persistence(system).snapshotStoreFor(null) ! SharedInMemorySnapshotStore.SetStore(getActorRef(node(node1) / "user" / "snapStore").get)
+	  Persistence(system).snapshotStoreFor(null) ! 
+	      SharedInMemorySnapshotStore.SetStore(getActorRef(node(node1) / "user" / "snapStore").get)
 	}
 	
 	
