@@ -60,12 +60,14 @@ The shared snapshot store is configured in a similar way.  An example can be fou
 
 	runOn(node1) {
 	  Persistence(system).snapshotStoreFor(null) ! 
-	      SharedInMemorySnapshotStore.SetStore(system.actorOf(Props[InMemorySnapshotStore], "snapStore"))
+	      SharedInMemorySnapshotStore.SetStore(
+	          system.actorOf(Props[InMemorySnapshotStore], "snapStore"))
 	}
 	
 	runOn(node2) {
 	  Persistence(system).snapshotStoreFor(null) ! 
-	      SharedInMemorySnapshotStore.SetStore(getActorRef(node(node1) / "user" / "snapStore").get)
+	      SharedInMemorySnapshotStore.SetStore(
+	          getActorRef(node(node1) / "user" / "snapStore").get)
 	}
 	
 	
