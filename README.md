@@ -76,4 +76,4 @@ The shared snapshot store is configured in a similar way.  An example can be fou
 
 The design for the shared plugins is heavily based on the shared LevelDB journal in `akka-persistence`.  The shared journal test is ported from the shared LevelDB journal test from the same source.    
 
-Thanks to [![One Geek](http://www.onegeek.com.au/scala/setting-up-travis-ci-for-scala)] for the article on TravisCi-to-Bintray setup
+Thanks to [OneGeek](http://www.onegeek.com.au) for the [article](http://www.onegeek.com.au/scala/setting-up-travis-ci-for-scala)  on TravisCi-to-Bintray setup
