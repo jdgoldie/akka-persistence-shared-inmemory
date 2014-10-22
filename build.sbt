@@ -17,7 +17,8 @@
 import com.typesafe.sbt.SbtMultiJvm
 import com.typesafe.sbt.SbtMultiJvm.MultiJvmKeys.MultiJvm
 import sbt.Keys._
-
+import bintray.AttrMap
+import bintray._
 
 lazy val root = (project in file("."))
   .settings(name := "akka-persistence-shared-inmemory")
@@ -25,6 +26,9 @@ lazy val root = (project in file("."))
   .settings(scalaVersion := "2.11.1")
   .settings(crossScalaVersions := Seq("2.10.0"))
   .settings(licenses := Seq(("Apache License, Version 2.0", url("http://www.apache.org/licenses/LICENSE-2.0"))))
+  .settings(bintrayPublishSettings:_*)
+  .settings(bintray.Keys.repository in bintray.Keys.bintray := "maven")
+  .settings(bintray.Keys.bintrayOrganization in bintray.Keys.bintray := None)
   .settings(libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-persistence-experimental"      % "2.3.6" % "compile" withSources() withJavadoc(),
   "com.typesafe.akka" %% "akka-actor"                         % "2.3.6" % "compile" withSources() withJavadoc(),
