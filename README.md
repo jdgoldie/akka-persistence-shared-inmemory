@@ -6,7 +6,13 @@ This project contains in-memory implementations of the journal and snapshot stor
 
 **Adding to your project**
 
-*todo: add when CI build working*
+Add a resolver:
+
+	defaultResolvers += ("jdgoldie at bintray" at "http://dl.bintray.com/jdgoldie/maven")
+
+and the dependency:
+
+	  "com.jdgoldie" %% "akka-persistence-shared-inmemory" % "1.0"
 
 
 **Use in a single node test**
