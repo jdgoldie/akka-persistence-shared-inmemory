@@ -12,7 +12,7 @@ Add a resolver:
 
 and the dependency:
 
-	  "com.github.jdgoldie" %% "akka-persistence-shared-inmemory" % "1.0+"
+	  "com.github.jdgoldie" %% "akka-persistence-shared-inmemory" % "1.0.15"
 
 **Use in a single node test**
 

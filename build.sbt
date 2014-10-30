@@ -22,7 +22,7 @@ import bintray._
 
 lazy val root = (project in file("."))
   .settings(name := "akka-persistence-shared-inmemory")
-  .settings(version := "1.0")
+  .settings(version := "1.0.15")
   .settings(scalaVersion := "2.11.2")
   .settings(organization := "com.github.jdgoldie")
   .settings(crossScalaVersions := Seq("2.11.2","2.10.4"))
