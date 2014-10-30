@@ -12,12 +12,7 @@ Add a resolver:
 
 and the dependency:
 
-	  "com.jdgoldie" %% "akka-persistence-shared-inmemory" % "1.0.14"
-
-
-Download directly or reference the lastest version from bintray:
-
-[ ![Download](https://api.bintray.com/packages/jdgoldie/maven/akka-persistence-shared-inmemory/images/download.svg) ](https://bintray.com/jdgoldie/maven/akka-persistence-shared-inmemory/_latestVersion)
+	  "com.github.jdgoldie" %% "akka-persistence-shared-inmemory" % "1.0+"
 
 **Use in a single node test**
 
