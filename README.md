@@ -4,6 +4,8 @@ This project contains in-memory implementations of the journal and snapshot stor
 
 [![Build Status](https://travis-ci.org/jdgoldie/akka-persistence-shared-inmemory.svg)](https://travis-ci.org/jdgoldie/akka-persistence-shared-inmemory)
 
+[![Coverage Status](https://img.shields.io/coveralls/jdgoldie/akka-persistence-shared-inmemory.svg)](https://coveralls.io/r/jdgoldie/akka-persistence-shared-inmemory)
+
 **Adding to your project**
 
 Add a resolver:

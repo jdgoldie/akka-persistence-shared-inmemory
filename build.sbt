@@ -19,6 +19,7 @@ import com.typesafe.sbt.SbtMultiJvm.MultiJvmKeys.MultiJvm
 import sbt.Keys._
 import bintray.AttrMap
 import bintray._
+import scoverage.ScoverageSbtPlugin._
 
 lazy val root = (project in file("."))
   .settings(name := "akka-persistence-shared-inmemory")
@@ -37,10 +38,12 @@ lazy val root = (project in file("."))
   "com.typesafe.akka" %% "akka-testkit"                       % "2.3.6" % "test"    withSources() withJavadoc(),
   "com.typesafe.akka" %% "akka-persistence-tck-experimental"  % "2.3.6" % "test"    withSources() withJavadoc(),
   "org.scalatest"     %% "scalatest"                          % "2.1.4" % "test"    withSources() withJavadoc(),
-  "com.typesafe.akka" %% "akka-multi-node-testkit"            % "2.3.6" % "test"    withSources() withJavadoc()))
+  "com.typesafe.akka" %% "akka-multi-node-testkit"            % "2.3.6" % "test"    withSources() withJavadoc(),
+  "org.scoverage"     %% "scalac-scoverage-plugin"            % "1.0.1" % "compile"))
   //MultiJvm settings sourced from the activator sample
   .settings(SbtMultiJvm.multiJvmSettings: _*)
   .settings(compile in MultiJvm <<= (compile in MultiJvm) triggeredBy (compile in Test))
+  .settings(dependencyClasspath in MultiJvm <++= dependencyClasspath in Test)
   .settings(unmanagedSourceDirectories in MultiJvm += baseDirectory.value / "src" / "multi-jvm")
   // make sure that MultiJvm tests are executed by the default test target,
   // and combine the results from ordinary test and multi-jvm tests

@@ -10,13 +10,14 @@ notifications:
     - jdgoldie@gmail.com
 jdk:
 - oraclejdk7
+script:
+- sbt clean coverage test
+- sbt coveralls
 env:
   global:
   - secure: VY6PqMc3oOB/Dq1oB7fvwf+8T+5JSaM3YCZjmRfffoKXQig2XXcwNE0zF4d90yWXWtX0E5K3crVKBf+sQiMLRKQCmnmbbMQmqV/jgnpjdxZqT/8i08iQ2XqfaFI7rbg+p3SrG0ofyHOEJWjLdPSxtpcRi3qJ33a5KUjSmoQPv9Y=
   - secure: BhC1+3Y0ii5LXnFqg9cY541vZcA+MePxp/bk0LQtcGmtDEkSsw4ol9/BGwlZGAKCIeOwQqAl+c+ETP8/ywrbznBsJbJwBJhTPeuNLpRBnsJA1kq9wRw1/5ZcJBCe93P6Tgy0K0Qt6QZqvhSAQa7oQbPI5Sh3gwppbb0YhPjpXh4=
+  - secure: VI/QU+CxfwXbAMULX2+7n28v6qCy0caHCy2VyEmtofG8oLdYg3fLUnbgJoJnQM4aX0iuHocg8tLSf/AXqL/WHaTmhxP5eLcjFuKHLtQLL9+7h8cFmRho44CsUPXntk1Ibe48F1g0PsTIYCnCeFAf6ZYYfjKH8hHSBkOnXskrqbk=
 after_success:
-  - >
-      test "${TRAVIS_PULL_REQUEST}" = 'false' &&
-      test "${TRAVIS_JDK_VERSION}" = 'oraclejdk7' &&
-      sh "$TRAVIS_BUILD_DIR/.travis.credentials.sh" &&
-      sbt +package +publish
+- test "${TRAVIS_PULL_REQUEST}" = 'false' && test "${TRAVIS_JDK_VERSION}" = 'oraclejdk7'
+  && sh "$TRAVIS_BUILD_DIR/.travis.credentials.sh" && sbt +package +publish
