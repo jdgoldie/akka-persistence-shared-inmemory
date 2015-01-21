@@ -23,22 +23,22 @@ import scoverage.ScoverageSbtPlugin._
 
 lazy val root = (project in file("."))
   .settings(name := "akka-persistence-shared-inmemory")
-  .settings(version := "1.0.15")
-  .settings(scalaVersion := "2.11.2")
+  .settings(version := "1.0.16")
+  .settings(scalaVersion := "2.11.5")
   .settings(organization := "com.github.jdgoldie")
-  .settings(crossScalaVersions := Seq("2.11.2","2.10.4"))
+  .settings(crossScalaVersions := Seq("2.11.5","2.10.4"))
   .settings(licenses += ("Apache-2.0", url("http://www.apache.org/licenses/LICENSE-2.0")))
   .settings(bintrayPublishSettings:_*)
   .settings(bintray.Keys.repository in bintray.Keys.bintray := "maven")
   .settings(bintray.Keys.bintrayOrganization in bintray.Keys.bintray := None)
   .settings(libraryDependencies ++= Seq(
-  "com.typesafe.akka" %% "akka-persistence-experimental"      % "2.3.6" % "compile" withSources() withJavadoc(),
-  "com.typesafe.akka" %% "akka-actor"                         % "2.3.6" % "compile" withSources() withJavadoc(),
-  "com.typesafe.akka" %% "akka-remote"                        % "2.3.6" % "test"    withSources() withJavadoc(),
-  "com.typesafe.akka" %% "akka-testkit"                       % "2.3.6" % "test"    withSources() withJavadoc(),
-  "com.typesafe.akka" %% "akka-persistence-tck-experimental"  % "2.3.6" % "test"    withSources() withJavadoc(),
+  "com.typesafe.akka" %% "akka-persistence-experimental"      % "2.3.9" % "compile" withSources() withJavadoc(),
+  "com.typesafe.akka" %% "akka-actor"                         % "2.3.9" % "compile" withSources() withJavadoc(),
+  "com.typesafe.akka" %% "akka-remote"                        % "2.3.9" % "test"    withSources() withJavadoc(),
+  "com.typesafe.akka" %% "akka-testkit"                       % "2.3.9" % "test"    withSources() withJavadoc(),
+  "com.typesafe.akka" %% "akka-persistence-tck-experimental"  % "2.3.9" % "test"    withSources() withJavadoc(),
   "org.scalatest"     %% "scalatest"                          % "2.1.4" % "test"    withSources() withJavadoc(),
-  "com.typesafe.akka" %% "akka-multi-node-testkit"            % "2.3.6" % "test"    withSources() withJavadoc(),
+  "com.typesafe.akka" %% "akka-multi-node-testkit"            % "2.3.9" % "test"    withSources() withJavadoc(),
   "org.scoverage"     %% "scalac-scoverage-plugin"            % "1.0.1" % "compile"))
   //MultiJvm settings sourced from the activator sample
   .settings(SbtMultiJvm.multiJvmSettings: _*)
