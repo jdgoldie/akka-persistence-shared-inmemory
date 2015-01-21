@@ -1,6 +1,6 @@
 **Overview**
 
-This project contains in-memory implementations of the journal and snapshot store for akka-persistence that are designed to work with multi-node and single-node unit tests.  Since all data is kept in memory structures, there are no side effects or cleanup between test runs.  These plugins are tested against `akka-persistence-tck-experimental` version 2.3.6
+This project contains in-memory implementations of the journal and snapshot store for akka-persistence that are designed to work with multi-node and single-node unit tests.  Since all data is kept in memory structures, there are no side effects or cleanup between test runs.  These plugins are tested against `akka-persistence-tck-experimental` version 2.3.9
 
 [![Build Status](https://travis-ci.org/jdgoldie/akka-persistence-shared-inmemory.svg)](https://travis-ci.org/jdgoldie/akka-persistence-shared-inmemory)
 
