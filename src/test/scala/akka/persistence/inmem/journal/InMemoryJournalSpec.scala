@@ -16,7 +16,9 @@
 
 package akka.persistence.inmem.journal
 
+import akka.persistence.JournalProtocol.{ReplayMessages, ReplayMessagesSuccess}
 import akka.persistence.journal.{JournalPerfSpec, JournalSpec}
+import akka.testkit.TestProbe
 import com.typesafe.config.ConfigFactory
 
 class InMemoryJournalSpec extends JournalSpec with JournalPerfSpec {
@@ -33,6 +35,19 @@ class InMemoryJournalSpec extends JournalSpec with JournalPerfSpec {
       |  }
       |}
     """.stripMargin)
+
+  "A journal" must {
+
+    "truncate all messages" in {
+      val receiverProbe = TestProbe()
+
+      InMemoryMessageStore.truncate()
+      journal ! ReplayMessages(1, Long.MaxValue, Long.MaxValue, pid, receiverProbe.ref)
+
+      receiverProbe.expectMsg(ReplayMessagesSuccess)
+    }
+  }
+
 }
 
 

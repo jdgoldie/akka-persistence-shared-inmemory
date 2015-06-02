@@ -16,8 +16,11 @@
 
 package akka.persistence.inmem.snapshot
 
+import akka.persistence.SnapshotProtocol.{LoadSnapshot, LoadSnapshotResult}
+import akka.persistence.SnapshotSelectionCriteria
 import akka.persistence.snapshot.SnapshotStoreSpec
-import com.typesafe.config.{ConfigFactory, Config}
+import akka.testkit.TestProbe
+import com.typesafe.config.{Config, ConfigFactory}
 
 class InMemorySnapshotSpec extends SnapshotStoreSpec {
   override lazy val config: Config = ConfigFactory.parseString(
@@ -25,4 +28,23 @@ class InMemorySnapshotSpec extends SnapshotStoreSpec {
       |akka.persistence.snapshot-store.plugin = "akka.persistence.inmem.snapshot-store"
       |akka.persistence.journal.plugin = "akka.persistence.inmem.journal"
     """.stripMargin)
+
+
+  override protected def beforeEach(): Unit = {
+    InMemorySnapshotStore.truncate()
+    super.beforeEach()
+  }
+
+  "A snapshot store" must {
+
+    "not load a snapshot given store is truncated" in {
+      val senderProbe = TestProbe()
+
+      InMemorySnapshotStore.truncate()
+
+      snapshotStore.tell(LoadSnapshot(pid, SnapshotSelectionCriteria.Latest, Long.MaxValue), senderProbe.ref)
+      senderProbe.expectMsg(LoadSnapshotResult(None, Long.MaxValue))
+    }
+  }
+
 }

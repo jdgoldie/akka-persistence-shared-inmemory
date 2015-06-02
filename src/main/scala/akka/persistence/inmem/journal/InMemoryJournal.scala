@@ -28,13 +28,21 @@ import scala.concurrent.Future
 import scala.concurrent.duration.DurationInt
 import scala.util._
 
+
+object InMemoryMessageStore {
+  private val mm = new HashMap[String, Set[PersistentRepr]] with MultiMap[String, PersistentRepr]
+
+  def truncate(): Unit =
+    mm.clear()
+}
+
 /**
  * A simple class that provides some basic CRUD functions on a HashMap + MultiMap to support
  * journal plugins.
  */
 trait InMemoryMessageStore {
 
-  val mm = new HashMap[String, Set[PersistentRepr]] with MultiMap[String, PersistentRepr]
+  import InMemoryMessageStore.mm
 
   /**
    * Adds messages to the multi map for the given persistence Id
@@ -99,7 +107,7 @@ trait InMemoryMessageStore {
 
   /** Updates messages for a given persistenceId using the supplied function
     *
-     * @param persistenceId
+    * @param persistenceId
     * @param p
     * @return
     */
@@ -129,7 +137,7 @@ trait InMemoryJournalBase extends InMemoryMessageStore {
 }
 
 /**
- * Implelemtation of AsyncWriteJournal backed by the InMemoryMessage store
+ * Implementation of AsyncWriteJournal backed by the InMemoryMessage store
  */
 class InMemoryJournal extends InMemoryJournalBase with AsyncWriteJournal with AsyncRecovery with ActorLogging {
 
