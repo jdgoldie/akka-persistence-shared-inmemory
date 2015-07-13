@@ -27,13 +27,21 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
 
+object InMemorySnapshotStore {
+
+  //SelectedSnapshot might not be the best name, but has meta + payload and is already defined
+  private val ss = new HashMap[String, Set[SelectedSnapshot]] with MultiMap[String, SelectedSnapshot]
+
+  def truncate(): Unit =
+    ss.clear()
+}
+
 /**
  * Supports SnapshotAPI implementations backed by a MultiMap
  */
 class InMemorySnapshotStore extends SnapshotStore with ActorLogging {
 
-  //SelectedSnapshot might not be the best name, but has meta + payload and is already defined
-  val ss = new HashMap[String, Set[SelectedSnapshot]] with MultiMap[String, SelectedSnapshot]
+  import InMemorySnapshotStore.ss
 
   /**
    * Finds the youngest snapshot that matches selection criteria.
