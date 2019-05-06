@@ -1,3 +1,9 @@
+**Deprecation Warning**
+
+This project has been deprecated by the addition of the [Persistence Plugin Proxy](https://doc.akka.io/docs/akka/current/persistence.html#persistence-plugin-proxy) which accomplishes the same function in conjunction with existing storage plugins.  Thanks to the Akka Team for adding this feature to the core of Persistence.
+
+***
+
 **Overview**
 
 This project contains in-memory implementations of the journal and snapshot store for akka-persistence that are designed to work with multi-node and single-node unit tests.  Since all data is kept in memory structures, there are no side effects or cleanup between test runs.  These plugins are tested against `akka-persistence-tck-experimental` version 2.3.9
